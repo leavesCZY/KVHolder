@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_setUserGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="随机设置 UserKV 的值"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_printUserGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="打印 UserKV 的内容"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_cleanUserGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="清除 UserKV 的内容"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_setPreferenceGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="随机设置 PreferenceKV 的值"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_printPreferenceGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="打印 PreferenceKV 的内容"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_cleanPreferenceGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="清除 PreferenceKV 的内容"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_printFinalKVGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="打印 FinalKV 的内容"
+        android:textAllCaps="false" />
+
+</LinearLayout>
