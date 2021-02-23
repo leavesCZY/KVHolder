@@ -137,4 +137,4 @@ object UserKV : IKVHolder by UserKVHolder {
 
 
 
-更多介绍请看这里：[一文读懂 SharedPreferences 的缺陷及一点点思考](https://github.com/leavesC/KVHolder/wiki/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82-SharedPreferences-%E7%9A%84%E7%BC%BA%E9%99%B7%E5%8F%8A%E4%B8%80%E7%82%B9%E7%82%B9%E6%80%9D%E8%80%83)
+更多介绍请看这里：[一文读懂 SharedPreferences 的缺陷及一点点思考](https://juejin.cn/post/6932277268110639112)
