@@ -61,7 +61,7 @@ object UserKV : IKVHolder by UserKVHolder {
     var userBeanOfDefault: UserBean
         get() = getBeanOrDefault(
             "userBeanOfDefault",
-            UserBean("叶志陈", "https://juejin.cn/user/923245496518439")
+            UserBean("业志陈", "https://juejin.cn/user/923245496518439")
         )
         set(value) = set("userBeanOfDefault", value)
 
@@ -123,7 +123,7 @@ object UserKV : IKVHolder by UserKVHolder {
 
 ```kotlin
         //存值
-        UserKV.name = "叶志陈"
+        UserKV.name = "业志陈"
         UserKV.blog = "https://juejin.cn/user/923245496518439"
 
         //取值
@@ -131,7 +131,7 @@ object UserKV : IKVHolder by UserKVHolder {
         val blog = UserKV.blog
 
         //动态指定 Key 进行赋值和取值
-        UserKV.set("name", "叶志陈")
+        UserKV.set("name", "业志陈")
         val name = UserKV.get("name", "")
 ```
 
