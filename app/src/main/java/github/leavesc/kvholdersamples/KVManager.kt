@@ -43,7 +43,7 @@ object UserKV : IKVHolder by UserKVHolder {
     var userBeanOfDefault: UserBean
         get() = getBeanOrDefault(
             "userBeanOfDefault",
-            UserBean("叶志陈", "https://juejin.cn/user/923245496518439")
+            UserBean("业志陈", "https://juejin.cn/user/923245496518439")
         )
         set(value) = set("userBeanOfDefault", value)
 

@@ -14,10 +14,6 @@ import kotlin.random.Random
  */
 class MainActivity : AppCompatActivity() {
 
-    private fun log(log: String) {
-        Log.e("TAG", log)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             UserKV.blog = Random.nextInt(1, 300).toString()
             UserKV.userBean = UserBean("leavesC", "https://juejin.cn/user/923245496518439")
             UserKV.userBeanList = listOf(
-                UserBean("叶志陈", "https://juejin.cn/user/923245496518439"),
+                UserBean("业志陈", "https://juejin.cn/user/923245496518439"),
                 UserBean("公众号", "字节数组"),
                 UserBean("GitHub", "https://github.com/leavesC")
             )
@@ -59,6 +55,10 @@ class MainActivity : AppCompatActivity() {
             log("FinalKV.firstVersionCode: " + FinalKV.firstVersionCode)
             log("FinalKV.firstVersionName: " + FinalKV.firstVersionName)
         }
+    }
+
+    private fun log(log: String) {
+        Log.e("TAG", log)
     }
 
 }

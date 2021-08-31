@@ -30,6 +30,30 @@ sealed class BaseMMKVKVHolder constructor(
         MMKV.MULTI_PROCESS_MODE
     ) else MMKV.mmkvWithID(keyGroup, MMKV.MULTI_PROCESS_MODE, encryptKey)
 
+    override fun get(key: String, default: Int): Int {
+        return kv?.getInt(key, default) ?: default
+    }
+
+    override fun get(key: String, default: Long): Long {
+        return kv?.getLong(key, default) ?: default
+    }
+
+    override fun get(key: String, default: Float): Float {
+        return kv?.getFloat(key, default) ?: default
+    }
+
+    override fun get(key: String, default: Double): Double {
+        return kv?.getString(key, "")?.toDoubleOrNull() ?: default
+    }
+
+    override fun get(key: String, default: Boolean): Boolean {
+        return kv?.getBoolean(key, default) ?: default
+    }
+
+    override fun get(key: String, default: String): String {
+        return kv?.getString(key, default) ?: default
+    }
+
     override fun set(key: String, value: Int) {
         if (verifyBeforePut(key, value)) {
             kv?.putInt(key, value)
@@ -74,30 +98,6 @@ sealed class BaseMMKVKVHolder constructor(
                 set(key, toJson(value))
             }
         }
-    }
-
-    override fun get(key: String, default: Int): Int {
-        return kv?.getInt(key, default) ?: default
-    }
-
-    override fun get(key: String, default: Long): Long {
-        return kv?.getLong(key, default) ?: default
-    }
-
-    override fun get(key: String, default: Float): Float {
-        return kv?.getFloat(key, default) ?: default
-    }
-
-    override fun get(key: String, default: Double): Double {
-        return kv?.getString(key, "")?.toDoubleOrNull() ?: default
-    }
-
-    override fun get(key: String, default: Boolean): Boolean {
-        return kv?.getBoolean(key, default) ?: default
-    }
-
-    override fun get(key: String, default: String): String {
-        return kv?.getString(key, default) ?: default
     }
 
     override fun containsKey(key: String): Boolean {
