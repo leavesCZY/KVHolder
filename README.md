@@ -10,7 +10,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.leavesC:KVHolder:1.0.1'
+    implementation 'com.github.leavesC:KVHolder:1.0.2'
 }
 ```
 
@@ -121,17 +121,17 @@ object UserKV : IKVHolder by UserKVHolder {
 之后我们在存取值时，就相当于在直接读写 UserKV 的属性值，也支持动态指定 Key 进行赋值取值，在易用性和可读性上相比 SharedPreferences 都有很大的提升，且对于外部来说完全屏蔽了具体的存储实现逻辑
 
 ```kotlin
-        //存值
-        UserKV.name = "业志陈"
-        UserKV.blog = "https://juejin.cn/user/923245496518439"
+//存值
+UserKV.name = "业志陈"
+UserKV.blog = "https://juejin.cn/user/923245496518439"
 
-        //取值
-        val name = UserKV.name
-        val blog = UserKV.blog
+//取值
+val name = UserKV.name
+val blog = UserKV.blog
 
-        //动态指定 Key 进行赋值和取值
-        UserKV.set("name", "业志陈")
-        val name = UserKV.get("name", "")
+//动态指定 Key 进行赋值和取值
+UserKV.set("name", "业志陈")
+val name = UserKV.get("name", "")
 ```
 
 更多介绍请看这里：[一文读懂 SharedPreferences 的缺陷及一点点思考](https://juejin.cn/post/6932277268110639112)
