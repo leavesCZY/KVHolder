@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
@@ -11,4 +12,16 @@ android {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.tencent:mmkv-static:1.2.10'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.leavesC'
+                artifactId = 'KVHolder'
+            }
+        }
+    }
 }
