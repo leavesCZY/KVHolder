@@ -16,15 +16,15 @@ import github.leavesc.kvholder.MMKVKVHolder
 //和用户强绑定的数据，在退出登录时需要全部清除，例如 UserId
 //设置 encryptKey 以便加密存储
 private val UserKVHolder: IKVHolder =
-    MMKVKVHolder("user", "keykeykeykey")
+    MMKVKVHolder(keyGroup = "user", encryptKey = "encryptKeyKeyKey")
 
 //和用户不强关联的数据，在退出登录时无需清除，例如夜间模式、字体大小等
 private val PreferenceKVHolder: IKVHolder =
-    MMKVKVHolder("preference")
+    MMKVKVHolder(keyGroup = "preference")
 
 //用于存储不会二次变更只用于历史溯源的数据，例如应用首次安装的时间、版本号、版本名等
 private val FinalKVHolder: IKVHolder =
-    MMKVKVFinalHolder("final")
+    MMKVKVFinalHolder(keyGroup = "final")
 
 object UserKV : IKVHolder by UserKVHolder {
 

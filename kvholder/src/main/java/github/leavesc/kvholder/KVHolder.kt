@@ -11,8 +11,16 @@ import com.tencent.mmkv.MMKV
  */
 object KVHolder {
 
-    fun init(context: Context, logLevel: KVLogLevel = KVLogLevel.LevelWarning) {
-        MMKV.initialize(context.applicationContext, logLevel.toMMKVLogLevel())
+    fun init(
+        context: Context,
+        rootDir: String = context.filesDir.absolutePath + "/mmkv",
+        logLevel: KVLogLevel = KVLogLevel.LevelWarning
+    ) {
+        MMKV.initialize(
+            context.applicationContext,
+            rootDir,
+            logLevel.toMMKVLogLevel()
+        )
     }
 
 }

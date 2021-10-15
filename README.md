@@ -3,16 +3,15 @@
 ## 导入依赖
 
 ```groovy
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
 
-	dependencies {
-	        implementation 'com.github.leavesC:KVHolder:1.0.1'
-	}
+dependencies {
+    implementation 'com.github.leavesC:KVHolder:1.0.1'
+}
 ```
 
 ## 如何使用
@@ -20,7 +19,7 @@
 在应用启动时先进行初始化
 
 ```kotlin
-	KVHolder.init(Context)
+KVHolder.init(Context)
 ```
 
 根据项目实际需求来定义数据范围。例如，你可以将应用内所有需要存储的键值对数据分为三类：**用户强关联数据、应用配置数据、不可二次变更的数据**。每一类数据的存储区域各不相同，互不影响。进行数据分组的好处就在于可以根据需要来清除特定数据，例如当用户退登后我们应该只清除 UserKVHolder，PreferenceKVHolder 和 FinalKVHolder 则可以一直保留
@@ -134,7 +133,5 @@ object UserKV : IKVHolder by UserKVHolder {
         UserKV.set("name", "业志陈")
         val name = UserKV.get("name", "")
 ```
-
-
 
 更多介绍请看这里：[一文读懂 SharedPreferences 的缺陷及一点点思考](https://juejin.cn/post/6932277268110639112)

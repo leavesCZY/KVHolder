@@ -11,15 +11,13 @@ import github.leavesc.kvholder.IKVHolder.Companion.toJson
  * @GitHub：https://github.com/leavesC
  */
 /**
- * @param selfGroup 用于指定数据分组，不同分组下的数据互不关联
+ * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
  * @param encryptKey 加密 key，如果为空则表示不进行加密
  */
 sealed class BaseMMKVKVHolder constructor(
-    selfGroup: String,
+    final override val keyGroup: String,
     encryptKey: String
 ) : IKVHolder {
-
-    final override val keyGroup: String = selfGroup
 
     override fun verifyBeforePut(key: String, value: Any?): Boolean {
         return true
@@ -123,10 +121,12 @@ sealed class BaseMMKVKVHolder constructor(
     private fun getObjectValue(
         mmkv: MMKV,
         key: String
-    ): Any? { // 因为其他基础类型value会读成空字符串,所以不是空字符串即为string or string-set类型
+    ): Any? {
+        //因为其他基础类型value会读成空字符串,所以不是空字符串即为string or string-set类型
         try {
             val value = mmkv.decodeString(key)
-            if (!TextUtils.isEmpty(value)) { // 判断 string or string-set
+            if (!TextUtils.isEmpty(value)) {
+                // 判断 string or string-set
                 return if (value?.getOrNull(0)?.toInt() == 0x01) {
                     mmkv.decodeStringSet(key)
                 } else {
@@ -165,19 +165,19 @@ sealed class BaseMMKVKVHolder constructor(
 }
 
 /**
- * @param selfGroup 用于指定数据分组，不同分组下的数据互不关联
+ * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
  * @param encryptKey 加密 key，如果为空则表示不进行加密
  */
-class MMKVKVHolder constructor(selfGroup: String, encryptKey: String = "") :
-    BaseMMKVKVHolder(selfGroup, encryptKey)
+class MMKVKVHolder constructor(keyGroup: String, encryptKey: String = "") :
+    BaseMMKVKVHolder(keyGroup, encryptKey)
 
 /**
  * 存储后值无法二次变更
- * @param selfGroup 用于指定数据分组，不同分组下的数据互不关联
+ * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
  * @param encryptKey 加密 key，如果为空则表示不进行加密
  */
-class MMKVKVFinalHolder constructor(selfGroup: String, encryptKey: String = "") :
-    BaseMMKVKVHolder(selfGroup, encryptKey) {
+class MMKVKVFinalHolder constructor(keyGroup: String, encryptKey: String = "") :
+    BaseMMKVKVHolder(keyGroup, encryptKey) {
 
     override fun verifyBeforePut(key: String, value: Any?): Boolean {
         return !containsKey(key)
