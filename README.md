@@ -1,4 +1,4 @@
-# KVHolder
+# KVHolder [![](https://jitpack.io/v/leavesC/KVHolder.svg)](https://jitpack.io/#leavesC/KVHolder)
 
 ## 导入依赖
 
