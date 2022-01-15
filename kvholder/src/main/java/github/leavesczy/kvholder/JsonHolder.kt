@@ -1,14 +1,14 @@
-package github.leavesc.kvholder
+package github.leavesczy.kvholder
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
 /**
- * @Author: leavesC
+ * @Author: leavesCZY
  * @Date: 2021/2/21 0:05
  * @Desc:
- * @GitHub：https://github.com/leavesC
+ * @GitHub：https://github.com/leavesCZY
  */
 object JsonHolder {
 

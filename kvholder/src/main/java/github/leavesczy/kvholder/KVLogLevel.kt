@@ -1,12 +1,12 @@
-package github.leavesc.kvholder
+package github.leavesczy.kvholder
 
 import com.tencent.mmkv.MMKVLogLevel
 
 /**
- * @Author: leavesC
+ * @Author: leavesCZY
  * @Date: 2021/2/21 0:39
  * @Desc:
- * @GitHub：https://github.com/leavesC
+ * @GitHub：https://github.com/leavesCZY
  */
 enum class KVLogLevel {
 

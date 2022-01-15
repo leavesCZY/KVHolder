@@ -1,4 +1,4 @@
-package github.leavesc.kvholdersamples
+package github.leavesczy.kvholdersamples
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

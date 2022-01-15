@@ -1,17 +1,17 @@
-package github.leavesc.kvholdersamples
+package github.leavesczy.kvholdersamples
 
-import github.leavesc.kvholder.IKVHolder
-import github.leavesc.kvholder.IKVHolder.Companion.getBean
-import github.leavesc.kvholder.IKVHolder.Companion.getBeanOrDefault
-import github.leavesc.kvholder.IKVHolder.Companion.getBeanOrNull
-import github.leavesc.kvholder.MMKVKVFinalHolder
-import github.leavesc.kvholder.MMKVKVHolder
+import github.leavesczy.kvholder.IKVHolder
+import github.leavesczy.kvholder.IKVHolder.Companion.getBean
+import github.leavesczy.kvholder.IKVHolder.Companion.getBeanOrDefault
+import github.leavesczy.kvholder.IKVHolder.Companion.getBeanOrNull
+import github.leavesczy.kvholder.MMKVKVFinalHolder
+import github.leavesczy.kvholder.MMKVKVHolder
 
 /**
- * @Author: leavesC
+ * @Author: leavesCZY
  * @Date: 2021/2/21 0:22
  * @Desc:
- * @GitHub：https://github.com/leavesC
+ * @GitHub：https://github.com/leavesCZY
  */
 //和用户强绑定的数据，在退出登录时需要全部清除，例如 UserId
 //设置 encryptKey 以便加密存储

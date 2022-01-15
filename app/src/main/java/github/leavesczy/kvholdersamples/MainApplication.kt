@@ -1,13 +1,13 @@
-package github.leavesc.kvholdersamples
+package github.leavesczy.kvholdersamples
 
 import android.app.Application
-import github.leavesc.kvholder.KVHolder
+import github.leavesczy.kvholder.KVHolder
 
 /**
- * @Author: leavesC
+ * @Author: leavesCZY
  * @Date: 2021/2/21 0:22
  * @Desc:
- * @GitHub：https://github.com/leavesC
+ * @GitHub：https://github.com/leavesCZY
  */
 class MainApplication : Application() {
 

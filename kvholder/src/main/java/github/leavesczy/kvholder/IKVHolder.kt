@@ -1,10 +1,10 @@
-package github.leavesc.kvholder
+package github.leavesczy.kvholder
 
 /**
- * @Author: leavesC
+ * @Author: leavesCZY
  * @Date: 2021/2/21 0:07
  * @Desc:
- * @GitHub：https://github.com/leavesC
+ * @GitHub：https://github.com/leavesCZY
  */
 interface IKVHolder {
 
