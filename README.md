@@ -1,4 +1,4 @@
-# KVHolder [![](https://jitpack.io/v/leavesC/KVHolder.svg)](https://jitpack.io/#leavesC/KVHolder)
+# KVHolder [![](https://jitpack.io/v/leavesCZY/KVHolder.svg)](https://jitpack.io/#leavesCZY/KVHolder)
 
 ## 导入依赖
 
@@ -10,7 +10,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.leavesC:KVHolder:1.0.2'
+    implementation 'com.github.leavesCZY:KVHolder:1.0.3'
 }
 ```
 
