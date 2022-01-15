@@ -1,5 +1,7 @@
 package github.leavesczy.kvholder
 
+import com.google.gson.Gson
+
 /**
  * @Author: leavesCZY
  * @Date: 2021/2/21 0:07
@@ -10,20 +12,36 @@ interface IKVHolder {
 
     companion object {
 
+        val gson = Gson()
+
+        fun toJson(ob: Any?): String {
+            try {
+                return gson.toJson(ob)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+            return ""
+        }
+
+        inline fun <reified T> toBean(json: String?): T {
+            return gson.fromJson(json, T::class.java)
+        }
+
         inline fun <reified T> IKVHolder.getBean(key: String): T {
-            return JsonHolder.toBean(get(key, ""))
+            return toBean(json = get(key = key, default = ""))
         }
 
         inline fun <reified T> IKVHolder.getBeanOrNull(key: String): T? {
-            return JsonHolder.toBeanOrNull(get(key, ""))
+            try {
+                return getBean(key = key)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+            return null
         }
 
         inline fun <reified T> IKVHolder.getBeanOrDefault(key: String, defaultValue: T): T {
-            return JsonHolder.toBeanOrDefault(get(key, ""), defaultValue)
-        }
-
-        fun toJson(ob: Any?): String {
-            return JsonHolder.toJson(ob)
+            return getBeanOrNull(key = key) ?: defaultValue
         }
 
     }

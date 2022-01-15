@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 UserBean("公众号", "字节数组"),
                 UserBean("GitHub", "https://github.com/leavesCZY")
             )
-            UserKV.map = hashMapOf(1 to "hello", 2 to "hi")
+            UserKV.map = mutableMapOf(1 to "hello", 2 to "hi")
         }
         btnPrintUserGroup.setOnClickListener {
             val log = "UserKV.name: " + UserKV.name + "\n" +
@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity() {
             PreferenceKV.fontSize = Random.nextInt(1, 300)
         }
         btnPrintPreferenceGroup.setOnClickListener {
-            val log = "PreferenceKV.appTheme: " + PreferenceKV.appTheme + "\n" +
-                    "PreferenceKV.fontSize: " + PreferenceKV.fontSize
+            val log =
+                "PreferenceKV.appTheme: " + PreferenceKV.appTheme + "\n" + "PreferenceKV.fontSize: " + PreferenceKV.fontSize
             log(log)
         }
         btnCleanPreferenceGroup.setOnClickListener {
@@ -86,9 +86,7 @@ class MainActivity : AppCompatActivity() {
         btnPrintFinalKVGroup.setOnClickListener {
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
             val log =
-                "FinalKV.firstInstallTime: " + sdf.format(Date(FinalKV.firstInstallTime)) + "\n" +
-                        "FinalKV.firstVersionCode: " + FinalKV.firstVersionCode + "\n" +
-                        "FinalKV.firstVersionName: " + FinalKV.firstVersionName
+                "FinalKV.firstInstallTime: " + sdf.format(Date(FinalKV.firstInstallTime)) + "\n" + "FinalKV.firstVersionCode: " + FinalKV.firstVersionCode + "\n" + "FinalKV.firstVersionName: " + FinalKV.firstVersionName
             log(log)
         }
         btnClearLog.setOnClickListener {
