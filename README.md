@@ -10,7 +10,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.leavesCZY:KVHolder:1.0.3'
+    implementation 'com.github.leavesCZY:KVHolder:version'
 }
 ```
 
