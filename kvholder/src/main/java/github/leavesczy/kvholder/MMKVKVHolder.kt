@@ -168,7 +168,7 @@ sealed class BaseMMKVKVHolder constructor(
  * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
  * @param encryptKey 加密 key，如果为空则表示不进行加密
  */
-class MMKVKVHolder constructor(keyGroup: String, encryptKey: String = "") :
+class MMKVKVHolder(keyGroup: String, encryptKey: String = "") :
     BaseMMKVKVHolder(keyGroup, encryptKey)
 
 /**
@@ -176,7 +176,7 @@ class MMKVKVHolder constructor(keyGroup: String, encryptKey: String = "") :
  * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
  * @param encryptKey 加密 key，如果为空则表示不进行加密
  */
-class MMKVKVFinalHolder constructor(keyGroup: String, encryptKey: String = "") :
+class MMKVKVFinalHolder(keyGroup: String, encryptKey: String = "") :
     BaseMMKVKVHolder(keyGroup, encryptKey) {
 
     override fun verifyBeforePut(key: String, value: Any?): Boolean {

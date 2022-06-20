@@ -22,7 +22,9 @@ dependencies {
 KVHolder.init(Context)
 ```
 
-根据项目实际需求来定义数据范围。例如，你可以将应用内所有需要存储的键值对数据分为三类：**用户强关联数据、应用配置数据、不可二次变更的数据**。每一类数据的存储区域各不相同，互不影响。进行数据分组的好处就在于可以根据需要来清除特定数据，例如当用户退登后我们应该只清除 UserKVHolder，PreferenceKVHolder 和 FinalKVHolder 则可以一直保留
+根据项目实际需求来定义数据范围。例如，你可以将应用内所有需要存储的键值对数据分为三类：**用户强关联数据、应用配置数据、不可二次变更的数据**
+。每一类数据的存储区域各不相同，互不影响。进行数据分组的好处就在于可以根据需要来清除特定数据，例如当用户退登后我们应该只清除 UserKVHolder，PreferenceKVHolder 和
+FinalKVHolder 则可以一直保留
 
 ```kotlin
 //和用户强绑定的数据，在退出登录时需要全部清除，例如 UserBean
@@ -38,7 +40,9 @@ private val FinalKVHolder: IKVHolder = MMKVKVFinalHolder("final")
 
 之后我们就可以利用 Kotlin 强大的语法特性来定义键值对了
 
-例如，对于和用户强关联的数据，每个键值对都定义为 UserKV 的一个属性字段，键值对的含义和作用通过属性名来进行标识，且键值对的 key 必须和属性名保持一致，这样可以避免 key 值重复。每个 getValue 操作也都支持设置默认值。IKVHolder 内部通过 Gson 来实现序列化和反序列化，这样 UserKV 就可以直接存储 JavaBean、JavaBeanList，Map 等数据结构了
+例如，对于和用户强关联的数据，每个键值对都定义为 UserKV 的一个属性字段，键值对的含义和作用通过属性名来进行标识，且键值对的 key 必须和属性名保持一致，这样可以避免 key 值重复。每个
+getValue 操作也都支持设置默认值。IKVHolder 内部通过 Gson 来实现序列化和反序列化，这样 UserKV 就可以直接存储 JavaBean、JavaBeanList，Map
+等数据结构了
 
 ```kotlin
 data class UserBean(val name: String, val blog: String)
@@ -118,7 +122,8 @@ object UserKV : IKVHolder by UserKVHolder {
 }
 ```
 
-之后我们在存取值时，就相当于在直接读写 UserKV 的属性值，也支持动态指定 Key 进行赋值取值，在易用性和可读性上相比 SharedPreferences 都有很大的提升，且对于外部来说完全屏蔽了具体的存储实现逻辑
+之后我们在存取值时，就相当于在直接读写 UserKV 的属性值，也支持动态指定 Key 进行赋值取值，在易用性和可读性上相比 SharedPreferences
+都有很大的提升，且对于外部来说完全屏蔽了具体的存储实现逻辑
 
 ```kotlin
 //存值
