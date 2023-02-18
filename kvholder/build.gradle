@@ -1,28 +1,18 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'maven-publish'
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     defaultConfig {
         minSdkVersion 16
-        consumerProguardFiles 'consumer-rules.pro'
+        consumerProguardFiles "consumer-rules.pro"
     }
+    namespace "github.leavesczy.kvholder"
 }
 
 dependencies {
-    implementation 'com.tencent:mmkv:1.2.13'
-    implementation 'com.google.code.gson:gson:2.9.0'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.leavesCZY'
-                artifactId = 'KVHolder'
-            }
-        }
-    }
+    implementation "com.tencent:mmkv:1.2.15"
+    implementation "com.google.code.gson:gson:2.10.1"
 }
