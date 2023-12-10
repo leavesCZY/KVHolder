@@ -8,16 +8,18 @@ import github.leavesczy.kvholder.MMKVKVHolder
  * @Date: 2023/12/5 14:20
  * @Desc:
  */
-private val UserMMKV = MMKVKVHolder(
+//设置 encryptKey 以进行加密存储
+//该值可以自由定义，但设置后不能再次修改，否则数据将丢失
+private val UserKVHolder = MMKVKVHolder(
     keyGroup = "user",
     encryptKey = "encryptKey"
 )
 
-private val PreferenceMMKV = MMKVKVHolder(
+private val PreferenceKVHolder = MMKVKVHolder(
     keyGroup = "preference"
 )
 
-object UserKV : IKVHolder by UserMMKV {
+object UserKV : IKVHolder by UserKVHolder {
 
     var intValue by int(defaultValue = -1)
 
@@ -53,7 +55,7 @@ object UserKV : IKVHolder by UserMMKV {
 
 }
 
-object PreferenceKV : IKVHolder by PreferenceMMKV {
+object PreferenceKV : IKVHolder by PreferenceKVHolder {
 
     var parcelableValue by parcelable(
         clazz = ParcelizeModel::class.java,

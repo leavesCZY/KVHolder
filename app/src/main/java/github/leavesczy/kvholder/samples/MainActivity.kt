@@ -54,27 +54,27 @@ class MainActivity : AppCompatActivity() {
             UserKV.longValue = randomInt().toLong()
             UserKV.floatValue = randomInt().toFloat()
             UserKV.doubleValue = randomInt().toDouble()
-            UserKV.booleanValue = randomInt() / 2 == 0
-            UserKV.stringValue = "leavesCZY" + "_" + randomInt()
+            UserKV.booleanValue = randomBoolean()
+            UserKV.stringValue = randomWord()
             UserKV.parcelableValue = ParcelizeModel(
-                name = "leavesCZY" + "_" + randomInt(),
+                name = randomWord(),
                 age = randomInt()
             )
-            UserKV.parcelableValueNullEnabled = if (Random.nextBoolean()) {
+            UserKV.parcelableValueNullEnabled = if (randomBoolean()) {
                 ParcelizeModel(
-                    name = "leavesCZY" + "_" + randomInt(),
+                    name = randomWord(),
                     age = randomInt()
                 )
             } else {
                 null
             }
             UserKV.jsonValue = JsonModel(
-                name = "leavesCZY" + "_" + randomInt(),
+                name = randomWord(),
                 age = randomInt()
             )
-            UserKV.jsonValueNullEnabled = if (Random.nextBoolean()) {
+            UserKV.jsonValueNullEnabled = if (randomBoolean()) {
                 JsonModel(
-                    name = "leavesCZY" + "_" + randomInt(),
+                    name = randomWord(),
                     age = randomInt()
                 )
             } else {
@@ -119,15 +119,15 @@ class MainActivity : AppCompatActivity() {
         }
         btnSetPreferenceGroup.setOnClickListener {
             PreferenceKV.parcelableValue = ParcelizeModel(
-                name = "leavesCZY" + "_" + randomInt(),
+                name = randomWord(),
                 age = randomInt()
             )
-            PreferenceKV.parcelableValueNullEnabled = if (Random.nextBoolean()) {
+            PreferenceKV.parcelableValueNullEnabled = if (randomBoolean()) {
                 ParcelizeModel(
-                    name = if (Random.nextBoolean()) {
+                    name = if (randomBoolean()) {
                         null
                     } else {
-                        "leavesCZY" + "_" + randomInt()
+                        randomWord()
                     },
                     age = randomInt()
                 )
@@ -154,6 +154,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun randomInt(): Int {
         return Random.nextInt(1, 500)
+    }
+
+    private fun randomBoolean(): Boolean {
+        return Random.nextBoolean()
+    }
+
+    private fun randomWord(): String {
+        return "leavesCZY" + "_" + randomInt()
     }
 
     private fun log(log: String) {

@@ -1,6 +1,7 @@
 package github.leavesczy.kvholder.samples
 
 import android.app.Application
+import android.content.Context
 import github.leavesczy.kvholder.KVHolder
 import github.leavesczy.kvholder.KVLogLevel
 
@@ -13,9 +14,13 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        initKVHolder(context = this)
+    }
+
+    private fun initKVHolder(context: Context) {
         KVHolder.init(
-            context = this,
-            rootDir = filesDir.absolutePath + "/mmkv",
+            context = context,
+            rootDir = context.filesDir.absolutePath + "/mmkv",
             logLevel = KVLogLevel.LevelWarning
         )
     }
