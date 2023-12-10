@@ -2,12 +2,12 @@ package github.leavesczy.kvholder
 
 import android.content.Context
 import com.tencent.mmkv.MMKV
+import java.io.File
 
 /**
  * @Author: leavesCZY
- * @Date: 2021/2/21 0:18
+ * @Date: 2023/12/10 16:38
  * @Desc:
- * @GitHub：https://github.com/leavesCZY
  */
 object KVHolder {
 
@@ -16,10 +16,14 @@ object KVHolder {
         rootDir: String = context.filesDir.absolutePath + "/mmkv",
         logLevel: KVLogLevel = KVLogLevel.LevelWarning
     ) {
+        val file = File(rootDir)
+        if (!file.exists()) {
+            file.mkdirs()
+        }
         MMKV.initialize(
             context.applicationContext,
             rootDir,
-            logLevel.toMMKVLogLevel()
+            logLevel.toMMKVLogLevel
         )
     }
 

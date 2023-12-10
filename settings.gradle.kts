@@ -1,8 +1,10 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -12,6 +14,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "KVHolder"
-include ":app"
-include ":kvholder"
+include(":app")
+include(":kvholder")

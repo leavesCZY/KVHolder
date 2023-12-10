@@ -1,186 +1,97 @@
 package github.leavesczy.kvholder
 
-import android.text.TextUtils
+import android.os.Parcelable
 import com.tencent.mmkv.MMKV
-import github.leavesczy.kvholder.IKVHolder.Companion.toJson
 
 /**
  * @Author: leavesCZY
- * @Date: 2021/2/21 0:09
+ * @Date: 2023/12/10 16:38
  * @Desc:
- * @GitHub：https://github.com/leavesCZY
  */
 /**
  * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
  * @param encryptKey 加密 key，如果为空则表示不进行加密
  */
-sealed class BaseMMKVKVHolder constructor(
-    final override val keyGroup: String,
-    encryptKey: String
+class MMKVKVHolder(
+    private val keyGroup: String,
+    encryptKey: String? = null
 ) : IKVHolder {
 
-    override fun verifyBeforePut(key: String, value: Any?): Boolean {
-        return true
+    private val kv: MMKV = if (encryptKey.isNullOrBlank()) {
+        MMKV.mmkvWithID(
+            keyGroup,
+            MMKV.MULTI_PROCESS_MODE
+        )
+    } else {
+        MMKV.mmkvWithID(
+            keyGroup,
+            MMKV.MULTI_PROCESS_MODE,
+            encryptKey
+        )
     }
 
-    private val kv: MMKV? = if (encryptKey.isBlank()) MMKV.mmkvWithID(
-        keyGroup,
-        MMKV.MULTI_PROCESS_MODE
-    ) else MMKV.mmkvWithID(keyGroup, MMKV.MULTI_PROCESS_MODE, encryptKey)
-
-    override fun get(key: String, default: Int): Int {
-        return kv?.getInt(key, default) ?: default
+    override fun get(key: String, defaultValue: Int): Int {
+        return kv.decodeInt(key, defaultValue)
     }
 
-    override fun get(key: String, default: Long): Long {
-        return kv?.getLong(key, default) ?: default
+    override fun get(key: String, defaultValue: Long): Long {
+        return kv.decodeLong(key, defaultValue)
     }
 
-    override fun get(key: String, default: Float): Float {
-        return kv?.getFloat(key, default) ?: default
+    override fun get(key: String, defaultValue: Float): Float {
+        return kv.decodeFloat(key, defaultValue)
     }
 
-    override fun get(key: String, default: Double): Double {
-        return kv?.getString(key, "")?.toDoubleOrNull() ?: default
+    override fun get(key: String, defaultValue: Double): Double {
+        return kv.decodeDouble(key, defaultValue)
     }
 
-    override fun get(key: String, default: Boolean): Boolean {
-        return kv?.getBoolean(key, default) ?: default
+    override fun get(key: String, defaultValue: Boolean): Boolean {
+        return kv.decodeBool(key, defaultValue)
     }
 
-    override fun get(key: String, default: String): String {
-        return kv?.getString(key, default) ?: default
+    override fun get(key: String, defaultValue: String): String {
+        return kv.decodeString(key, defaultValue) ?: defaultValue
+    }
+
+    override fun <T : Parcelable> get(key: String, clazz: Class<T>): T? {
+        return kv.decodeParcelable(key, clazz)
     }
 
     override fun set(key: String, value: Int) {
-        if (verifyBeforePut(key, value)) {
-            kv?.putInt(key, value)
-        }
+        kv.encode(key, value)
     }
 
     override fun set(key: String, value: Long) {
-        if (verifyBeforePut(key, value)) {
-            kv?.putLong(key, value)
-        }
+        kv.encode(key, value)
     }
 
     override fun set(key: String, value: Float) {
-        if (verifyBeforePut(key, value)) {
-            kv?.putFloat(key, value)
-        }
+        kv.encode(key, value)
     }
 
     override fun set(key: String, value: Double) {
-        if (verifyBeforePut(key, value)) {
-            kv?.putString(key, value.toString())
-        }
+        kv.encode(key, value)
     }
 
     override fun set(key: String, value: Boolean) {
-        if (verifyBeforePut(key, value)) {
-            kv?.putBoolean(key, value)
-        }
+        kv.encode(key, value)
     }
 
     override fun set(key: String, value: String) {
-        if (verifyBeforePut(key, value)) {
-            kv?.putString(key, value)
-        }
+        kv.encode(key, value)
     }
 
-    override fun <T> set(key: String, value: T?) {
-        if (verifyBeforePut(key, value)) {
-            if (value == null) {
-                removeKey(key)
-            } else {
-                set(key, toJson(value))
-            }
-        }
-    }
-
-    override fun containsKey(key: String): Boolean {
-        return kv?.containsKey(key) ?: false
+    override fun <T : Parcelable> set(key: String, value: T?) {
+        kv.encode(key, value)
     }
 
     override fun removeKey(vararg keys: String) {
-        kv?.removeValuesForKeys(keys)
-    }
-
-    override fun allKeyValue(): Map<String, Any?> {
-        val map = mutableMapOf<String, Any?>()
-        kv?.allKeys()?.forEach {
-            map[it] = getObjectValue(kv, it)
-        }
-        return map
+        kv.removeValuesForKeys(keys)
     }
 
     override fun clear() {
-        kv?.clearAll()
-    }
-
-    private fun getObjectValue(
-        mmkv: MMKV,
-        key: String
-    ): Any? {
-        //因为其他基础类型value会读成空字符串,所以不是空字符串即为string or string-set类型
-        try {
-            val value = mmkv.decodeString(key)
-            if (!TextUtils.isEmpty(value)) {
-                // 判断 string or string-set
-                return if (value?.getOrNull(0)?.toInt() == 0x01) {
-                    mmkv.decodeStringSet(key)
-                } else {
-                    value
-                }
-            }
-            // float double类型可通过string-set配合判断
-            // 通过数据分析可以看到类型为float或double时string类型为空字符串且string-set类型读出空数组
-            // 最后判断float为0或NAN的时候可以直接读成double类型,否则读float类型
-            // 该判断方法对于非常小的double类型数据 (0d < value <= 1.0569021313E-314) 不生效
-            val set = mmkv.decodeStringSet(key)
-            if (set != null && set.size == 0) {
-                val valueFloat = mmkv.decodeFloat(key)
-                val valueDouble = mmkv.decodeDouble(key)
-                return if (valueFloat.compareTo(0f) == 0 || valueFloat.compareTo(Float.NaN) == 0) {
-                    valueDouble
-                } else {
-                    valueFloat
-                }
-            }
-            // int long bool 类型的处理放在一起, int类型1和0等价于bool类型true和false
-            // 判断long或int类型时, 如果数据长度超出int的最大长度, 则long与int读出的数据不等, 可确定为long类型
-            val valueInt = mmkv.decodeInt(key)
-            val valueLong = mmkv.decodeLong(key)
-            return if (valueInt.toLong() != valueLong) {
-                valueLong
-            } else {
-                valueInt
-            }
-        } catch (e: Throwable) {
-            e.printStackTrace()
-        }
-        return "failed get"
-    }
-
-}
-
-/**
- * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
- * @param encryptKey 加密 key，如果为空则表示不进行加密
- */
-class MMKVKVHolder(keyGroup: String, encryptKey: String = "") :
-    BaseMMKVKVHolder(keyGroup, encryptKey)
-
-/**
- * 存储后值无法二次变更
- * @param keyGroup 用于指定数据分组，不同分组下的数据互不关联
- * @param encryptKey 加密 key，如果为空则表示不进行加密
- */
-class MMKVKVFinalHolder(keyGroup: String, encryptKey: String = "") :
-    BaseMMKVKVHolder(keyGroup, encryptKey) {
-
-    override fun verifyBeforePut(key: String, value: Any?): Boolean {
-        return !containsKey(key)
+        kv.clearAll()
     }
 
 }

@@ -1,67 +1,67 @@
 package github.leavesczy.kvholder
 
-import com.google.gson.Gson
+import android.os.Parcelable
 
 /**
  * @Author: leavesCZY
- * @Date: 2021/2/21 0:07
+ * @Date: 2023/12/10 16:38
  * @Desc:
- * @GitHub：https://github.com/leavesCZY
  */
 interface IKVHolder {
 
-    companion object {
-
-        val gson = Gson()
-
-        fun toJson(ob: Any?): String {
-            try {
-                return gson.toJson(ob)
-            } catch (e: Throwable) {
-                e.printStackTrace()
-            }
-            return ""
-        }
-
-        inline fun <reified T> toBean(json: String?): T {
-            return gson.fromJson(json, T::class.java)
-        }
-
-        inline fun <reified T> IKVHolder.getBean(key: String): T {
-            return toBean(json = get(key = key, default = ""))
-        }
-
-        inline fun <reified T> IKVHolder.getBeanOrNull(key: String): T? {
-            try {
-                return getBean(key = key)
-            } catch (e: Throwable) {
-                e.printStackTrace()
-            }
-            return null
-        }
-
-        inline fun <reified T> IKVHolder.getBeanOrDefault(key: String, defaultValue: T): T {
-            return getBeanOrNull(key = key) ?: defaultValue
-        }
-
+    fun int(defaultValue: Int): IntDelegate {
+        return IntDelegate(kvHolder = this, defaultValue = defaultValue)
     }
 
-    //数据分组，用于标明不同范围内的数据缓存
-    val keyGroup: String
+    fun long(defaultValue: Long): LongDelegate {
+        return LongDelegate(kvHolder = this, defaultValue = defaultValue)
+    }
 
-    fun verifyBeforePut(key: String, value: Any?): Boolean
+    fun float(defaultValue: Float): FloatDelegate {
+        return FloatDelegate(kvHolder = this, defaultValue = defaultValue)
+    }
 
-    fun get(key: String, default: Int): Int
+    fun double(defaultValue: Double): DoubleDelegate {
+        return DoubleDelegate(kvHolder = this, defaultValue = defaultValue)
+    }
 
-    fun get(key: String, default: Long): Long
+    fun boolean(defaultValue: Boolean): BooleanDelegate {
+        return BooleanDelegate(kvHolder = this, defaultValue = defaultValue)
+    }
 
-    fun get(key: String, default: Float): Float
+    fun string(defaultValue: String): StringDelegate {
+        return StringDelegate(kvHolder = this, defaultValue = defaultValue)
+    }
 
-    fun get(key: String, default: Double): Double
+    fun <T : Parcelable> parcelable(clazz: Class<T>, defaultValue: T): ParcelableDelegate<T> {
+        return ParcelableDelegate(kvHolder = this, clazz = clazz, defaultValue = defaultValue)
+    }
 
-    fun get(key: String, default: Boolean): Boolean
+    fun <T : Parcelable> parcelable(clazz: Class<T>): ParcelableNullEnabledDelegate<T> {
+        return ParcelableNullEnabledDelegate(kvHolder = this, clazz = clazz)
+    }
 
-    fun get(key: String, default: String): String
+    fun <T : Any> json(clazz: Class<T>, defaultValue: T): JsonDelegate<T> {
+        return JsonDelegate(kvHolder = this, clazz = clazz, defaultValue = defaultValue)
+    }
+
+    fun <T : Any> json(clazz: Class<T>): JsonNullEnabledDelegate<T> {
+        return JsonNullEnabledDelegate(kvHolder = this, clazz = clazz)
+    }
+
+    fun get(key: String, defaultValue: Int): Int
+
+    fun get(key: String, defaultValue: Long): Long
+
+    fun get(key: String, defaultValue: Float): Float
+
+    fun get(key: String, defaultValue: Double): Double
+
+    fun get(key: String, defaultValue: Boolean): Boolean
+
+    fun get(key: String, defaultValue: String): String
+
+    fun <T : Parcelable> get(key: String, clazz: Class<T>): T?
 
     fun set(key: String, value: Int)
 
@@ -75,13 +75,9 @@ interface IKVHolder {
 
     fun set(key: String, value: String)
 
-    fun <T> set(key: String, value: T?)
-
-    fun containsKey(key: String): Boolean
+    fun <T : Parcelable> set(key: String, value: T?)
 
     fun removeKey(vararg keys: String)
-
-    fun allKeyValue(): Map<String, Any?>
 
     fun clear()
 

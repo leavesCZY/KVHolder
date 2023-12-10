@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
-    tools:context=".MainActivity">
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -18,21 +16,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="随机设置 UserKV 的值"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnPrintUserGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="打印 UserKV 的内容"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnCleanUserGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="清除 UserKV 的内容"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnSetPreferenceGroup"
@@ -40,29 +41,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="随机设置 PreferenceKV 的值"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnPrintPreferenceGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="打印 PreferenceKV 的内容"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnCleanPreferenceGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="清除 PreferenceKV 的内容"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/btnPrintFinalKVGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="打印 FinalKV 的内容"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnClearLog"
@@ -70,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="清除日志"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
