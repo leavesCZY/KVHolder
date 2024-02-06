@@ -2,11 +2,15 @@
 
     <style name="Theme.kvHolder" parent="Theme.Material3.DayNight">
         <item name="colorPrimary">@color/color_top_bar</item>
-        <item name="colorSurface">@color/color_top_bar</item>
         <item name="colorOnSurface">@android:color/white</item>
+        <item name="toolbarStyle">@style/Theme.kvHolder.Toolbar</item>
         <item name="android:navigationBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+    <style name="Theme.kvHolder.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/color_top_bar</item>
     </style>
 
 </resources>
