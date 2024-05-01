@@ -9,7 +9,7 @@ android {
     compileSdk = 34
     defaultConfig {
         applicationId = "github.leavesczy.kvholder.samples"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
