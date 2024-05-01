@@ -63,6 +63,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-//    implementation(libs.kvholder)
-    implementation(project(":kvholder"))
+    implementation(libs.kvholder)
+//    implementation(project(":kvholder"))
 }
