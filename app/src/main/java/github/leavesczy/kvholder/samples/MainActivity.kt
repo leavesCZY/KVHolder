@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun log(log: String) {
         Log.e("TAG", log)
-        tvLog.append("\n\n" + log)
+        tvLog.append(log + "\n\n")
     }
 
 }

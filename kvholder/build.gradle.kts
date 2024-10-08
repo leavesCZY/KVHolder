@@ -9,7 +9,7 @@ android {
     namespace = "github.leavesczy.kvholder"
     compileSdk = 34
     defaultConfig {
-        minSdk = 16
+        minSdk = 21
         consumerProguardFiles.add(File("consumer-rules.pro"))
     }
     compileOptions {

@@ -9,7 +9,7 @@ android {
     compileSdk = 34
     defaultConfig {
         applicationId = "github.leavesczy.kvholder.samples"
-        minSdk = 23
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
@@ -63,6 +63,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-    implementation(libs.kvholder)
-//    implementation(project(":kvholder"))
+//    implementation(libs.kvholder)
+    implementation(project(":kvholder"))
 }
