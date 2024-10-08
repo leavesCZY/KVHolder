@@ -12,8 +12,8 @@ google-gson = "2.11.0"
 
 tencent-mmkv = "1.3.9"
 
-kvholder-remote = "1.0.7"
-kvholder-publishing = "1.0.7"
+kvholder-remote = "1.0.8"
+kvholder-publishing = "1.0.8"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-plugin" }
